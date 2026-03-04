@@ -4,7 +4,7 @@ import { Bricolage_Grotesque, Playfair_Display } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Background } from '@/components/Background'
 import { SkipToContent } from '@/components/SkipToContent'
-import { FloatingNav } from '@/components/FloatingNav'
+import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { site } from '@/lib/site'
 
@@ -48,7 +48,7 @@ export default function RootLayout({
         <ThemeProvider>
           <SkipToContent />
           <Background />
-          <FloatingNav />
+          <Header />
           {children}
           <Footer />
         </ThemeProvider>

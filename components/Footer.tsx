@@ -14,10 +14,20 @@ export function Footer() {
           <a className="text-muted-foreground hover:text-foreground" href={`mailto:${site.email}`}>
             Email
           </a>
-          <a className="text-muted-foreground hover:text-foreground" href={site.socials.linkedin}>
+          <a
+            className="text-muted-foreground hover:text-foreground"
+            href={site.socials.linkedin}
+            target="_blank"
+            rel="noreferrer"
+          >
             LinkedIn
           </a>
-          <a className="text-muted-foreground hover:text-foreground" href={site.socials.github}>
+          <a
+            className="text-muted-foreground hover:text-foreground"
+            href={site.socials.github}
+            target="_blank"
+            rel="noreferrer"
+          >
             GitHub
           </a>
         </div>

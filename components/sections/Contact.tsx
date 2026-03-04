@@ -12,12 +12,26 @@ export function Contact() {
             <div>
               <div className="text-[120px] font-display leading-none text-foreground/10">05</div>
               <p className="mt-2 text-xs uppercase tracking-[0.4em] text-muted-foreground">Contact</p>
-              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">
-                Let’s ship intelligent software together.
-              </h2>
+              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">Open to meaningful connections and opportunities.</h2>
               <p className="mt-4 text-muted-foreground">
-                I’m open to full‑time roles and collaborations across backend systems, ML, and product engineering.
+                I am open to software engineering roles, technical conversations, and learning opportunities.
               </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={`mailto:${site.email}`}
+                  className="rounded-full border border-border bg-background/70 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition hover:-translate-y-0.5 hover:border-foreground hover:bg-background"
+                >
+                  Email me directly
+                </a>
+                <a
+                  href={site.socials.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-border bg-background/70 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition hover:-translate-y-0.5 hover:border-foreground hover:bg-background"
+                >
+                  Connect on LinkedIn
+                </a>
+              </div>
               <div className="mt-6 space-y-3 text-sm">
                 <div className="flex items-center justify-between rounded-2xl border border-border bg-background/60 px-5 py-4">
                   <span>Email</span>
@@ -30,7 +44,12 @@ export function Contact() {
               </div>
             </div>
 
-            <form action={`mailto:${site.email}`} method="post" encType="text/plain" className="glass-surface outline-glow rounded-3xl border border-border p-6 space-y-4">
+            <form
+              action={`mailto:${site.email}`}
+              method="post"
+              encType="text/plain"
+              className="glass-surface outline-glow rounded-3xl border border-border p-6 space-y-4"
+            >
               <div className="grid gap-4 md:grid-cols-2">
                 <input
                   name="name"
@@ -56,7 +75,7 @@ export function Contact() {
               />
               <textarea
                 name="message"
-                placeholder="Tell me about the project..."
+                placeholder="Write your message..."
                 aria-label="Message"
                 rows={4}
                 className="w-full rounded-2xl border border-border bg-background/70 px-4 py-3 text-sm outline-none transition focus-visible:shadow-focus"
@@ -65,11 +84,9 @@ export function Contact() {
                 type="submit"
                 className="w-full rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background shadow-halo transition hover:-translate-y-1"
               >
-                Send message
+                Open email draft
               </button>
-              <p className="text-xs text-muted-foreground">
-                This form opens your email client with a prefilled message.
-              </p>
+              <p className="text-xs text-muted-foreground">This form opens your email client with a prefilled message.</p>
             </form>
           </div>
         </Reveal>

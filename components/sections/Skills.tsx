@@ -12,7 +12,7 @@ const skillCards = [
   { label: 'Databases', items: skills.databases },
   { label: 'Tools', items: skills.tools },
   { label: 'Platforms', items: skills.platforms },
-  { label: 'AI Tooling', items: skills.aiTools }
+  { label: 'Practices', items: skills.aiTools }
 ]
 
 export function Skills() {
@@ -24,11 +24,9 @@ export function Skills() {
             <div>
               <div className="text-[120px] font-display leading-none text-foreground/10">02</div>
               <p className="mt-2 text-xs uppercase tracking-[0.4em] text-muted-foreground">Capability</p>
-              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">
-                Systems depth across every layer of delivery.
-              </h2>
+              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">Practical skills across backend, API, and cloud delivery.</h2>
               <p className="mt-4 text-muted-foreground">
-                Full‑stack execution across backend reliability, ML pipelines, and clinician‑first UX.
+                Core strength in backend development with C# and .NET, with active exposure to MAUI and AWS.
               </p>
               <div className="mt-8 space-y-4">
                 {skillLevels.map((item) => (
@@ -51,10 +49,7 @@ export function Skills() {
               </div>
             </div>
 
-            <div
-              className="relative grid gap-5 md:grid-cols-2"
-              style={{ perspective: '1200px' }}
-            >
+            <div className="relative grid gap-5 md:grid-cols-2" style={{ perspective: '1200px' }}>
               {skillCards.map((card, index) => (
                 <div
                   key={card.label}
@@ -64,12 +59,12 @@ export function Skills() {
                   }}
                 >
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{card.label}</p>
-                  <p className="mt-3 text-sm">{card.items.join(' · ')}</p>
+                  <p className="mt-3 text-sm">{card.items.join(' - ')}</p>
                 </div>
               ))}
               <div className="glass-surface outline-glow rounded-3xl border border-border p-5 md:col-span-2">
                 <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Core Subjects</p>
-                <p className="mt-3 text-sm">{skills.subjects.join(' · ')}</p>
+                <p className="mt-3 text-sm">{skills.subjects.join(' - ')}</p>
               </div>
             </div>
           </div>

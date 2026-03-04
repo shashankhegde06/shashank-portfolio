@@ -8,15 +8,13 @@ export function Projects() {
     <Section id="projects">
       <Container>
         <Reveal>
-          <div className="grid gap-10 lg:grid-cols-[0.5fr_1.5fr]">
+          <div>
             <div>
               <div className="text-[120px] font-display leading-none text-foreground/10">03</div>
               <p className="mt-2 text-xs uppercase tracking-[0.4em] text-muted-foreground">Projects</p>
-            </div>
-            <div>
-              <h2 className="text-3xl font-semibold md:text-4xl">Interactive case study gallery.</h2>
+              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">Selected engineering work.</h2>
               <p className="mt-4 max-w-2xl text-muted-foreground">
-                Scroll horizontally to explore technical depth, outcomes, and architectural highlights.
+                Practical projects that reflect backend thinking, quality focus, and production readiness.
               </p>
             </div>
           </div>
@@ -36,7 +34,7 @@ export function Projects() {
                 <p className="mt-4 text-sm text-muted-foreground">{project.description}</p>
                 <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
                   {project.highlights.map((item) => (
-                    <li key={item}>• {item}</li>
+                    <li key={item}>- {item}</li>
                   ))}
                 </ul>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -50,12 +48,16 @@ export function Projects() {
                   ))}
                 </div>
                 <div className="mt-6 flex flex-wrap gap-4 text-xs font-semibold uppercase tracking-[0.3em]">
-                  <a className="text-foreground transition hover:text-primary" href={project.links.caseStudy}>
-                    Case Study
-                  </a>
-                  <a className="text-muted-foreground transition hover:text-foreground" href={project.links.repo}>
-                    Source
-                  </a>
+                  {project.links.caseStudy !== '#' && (
+                    <a className="text-foreground transition hover:text-primary" href={project.links.caseStudy}>
+                      Case Study
+                    </a>
+                  )}
+                  {project.links.repo !== '#' && (
+                    <a className="text-muted-foreground transition hover:text-foreground" href={project.links.repo}>
+                      Source
+                    </a>
+                  )}
                 </div>
               </article>
             </Reveal>

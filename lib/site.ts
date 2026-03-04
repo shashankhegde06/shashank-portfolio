@@ -1,20 +1,20 @@
 export const site = {
   name: 'Shashank Hegde',
-  title: 'Associate Software Engineer | Healthcare + Applied AI',
+  title: 'Software Engineer | C# .NET MAUI AWS',
   role: 'Associate Software Engineer',
   location: 'Bengaluru, India',
   email: 'shashankhegde47@gmail.com',
   phone: '+91 8088806238',
   url: 'https://example.com',
-  resumeUrl: '/resume.pdf',
+  resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL || '/resume.pdf',
   socials: {
     linkedin: 'https://www.linkedin.com/in/shashankhegde06',
     github: 'https://github.com/shashankhegde06'
   },
-  positioning: 'Engineering AI-powered healthcare software that reduces clinical burden and improves care delivery.',
+  positioning: 'Software Engineer building reliable backend systems with C# and .NET, with MAUI and AWS exposure.',
   summary: [
-    'Associate Software Engineer building AI-assisted healthcare applications that integrate directly with EHR systems.',
-    'Focused on clinical documentation automation, performant workflows, and reliable backend systems.'
+    'I work on backend systems using C# and .NET, build cross-platform apps with .NET MAUI, and support deployments on AWS.',
+    'I focus on clean, maintainable code, API design, and performance improvements, and I use generative AI tools to speed up development while validating outputs through testing and review.'
   ]
 }
 
@@ -27,33 +27,46 @@ export const navItems = [
 ]
 
 export const highlightStats = [
-  { label: 'Healthcare IT', value: 'Production' },
-  { label: 'ML + Infra', value: '2 Projects' },
-  { label: 'CGPA', value: '8.47' },
-  { label: 'PU Score', value: '96.66%' }
+  { label: 'Backend Focus', value: 'C# .NET' },
+  { label: 'App Development', value: '.NET MAUI' },
+  { label: 'Cloud Exposure', value: 'AWS' },
+  { label: 'Core Strength', value: 'Clean Code' }
 ]
 
 export const strengths = [
-  'Hands-on delivery of EHR-integrated healthcare applications',
-  'Applied AI for ambient clinical documentation and workflow automation',
-  'Performance and reliability improvements across UI, backend, and cloud',
-  'Agile delivery mindset in regulated healthcare environments'
+  'Designing and implementing backend services and APIs using C# and .NET',
+  'Writing clean, maintainable code with strong focus on readability and reliability',
+  'Building cross-platform applications with .NET MAUI when cross-team execution is needed',
+  'Contributing to cloud-ready deployments and operations on AWS'
 ]
 
 export const differentiators = [
-  'Built AI-assisted documentation workflows embedded in EHR systems',
-  'Delivered client-side caching to reduce API calls and load times',
-  'Designed resilient autosave patterns to prevent data loss',
-  'Balances product usability with healthcare compliance constraints'
+  'Started with Java and Python in college, then transitioned into the Microsoft stack',
+  'Hands-on experience with data migration, test automation, and API design',
+  'Use generative AI tools like Copilot, ChatGPT, and Claude to accelerate delivery without depending on them blindly',
+  'Curious about system internals and practical software scalability',
+  'Known for teammate collaboration and simplifying complex technical problems'
 ]
 
+export const personalInterests = [
+  'Outside coding, I like tinkering with new ideas, helping teammates, and staying hands-on with practical problem solving.',
+  'I enjoy sports, travelling, and occasionally singing.',
+  'I follow motorsport, cricket, podcasts, and tech reviews.',
+  'I am passionate about automobiles, riding, driving, and spending time in nature.'
+]
+
+export const personalQuote = {
+  text: "What's behind you doesn't matter.",
+  author: 'Enzo Ferrari'
+}
+
 export const skills = {
-  languages: ['C#', 'C'],
-  frameworks: ['.NET', 'MAUI', 'Angular'],
+  languages: ['C#', 'Java', 'Python', 'C'],
+  frameworks: ['.NET', 'MAUI'],
   databases: ['MySQL'],
   tools: ['Visual Studio', 'Visual Studio Code', 'Jupyter Notebook'],
   platforms: ['AWS'],
-  aiTools: ['Gen AI tooling'],
+  aiTools: ['AI-assisted Coding (Copilot)', 'ChatGPT', 'Claude', 'Manual Validation'],
   subjects: [
     'Data Structures and Algorithms',
     'Computer Networks',
@@ -66,24 +79,28 @@ export const skills = {
 
 export const skillLevels = [
   { label: 'Backend Systems', value: 90 },
-  { label: 'Healthcare Workflows', value: 88 },
-  { label: 'Applied ML', value: 78 },
-  { label: 'Cloud & DevOps', value: 74 }
+  { label: 'API Design', value: 86 },
+  { label: 'Performance Optimization', value: 82 },
+  { label: 'Debugging', value: 84 }
 ]
 
 export const experience = [
   {
     role: 'Associate Software Engineer',
     company: 'Greenway Health',
-    period: 'Jul 2025 – Present',
+    period: 'Jul 2025 - Present',
     location: 'Bengaluru, India',
     bullets: [
-      'Developing EHR-integrated healthcare applications focused on clinical documentation automation and workflow efficiency.',
-      'Contributing to GCA, an AI-powered ambient documentation tool that automates clinical notes to reduce administrative burden and improve patient engagement.',
-      'Implemented appointment-level local storage caching for template-driven workflows, cutting repeated settings calls and improving load time.',
-      'Designed a resilient autosave system with debounce, interval, and focus/blur saves to prevent data loss during note editing.',
-      'Enhanced UI flows for appointment templates and language selection to reduce cognitive load for clinicians.',
-      'Building features across C#, .NET, MAUI, Angular, AWS, and Gen AI tooling in a regulated healthcare environment.'
+      'Build and maintain backend services using C# and .NET for production business workflows.',
+      'Develop and improve REST APIs with focus on performance, readability, and long-term maintainability.',
+      'Implemented autosave during editing using 2-second inactivity debounce, a 15-second fallback interval, and on-blur save to reduce data loss.',
+      'Improved recording page performance by caching templates, sections, and language selections locally after first load with refresh on upstream changes.',
+      'Delivered UI enhancements that reduced user confusion and improved feature clarity.',
+      'Built beginner-level domain understanding of EHR and clinical workflows to support better feature decisions.',
+      'Support data migration activities and validation to ensure safe and accurate transitions across systems.',
+      'Contribute to test automation to improve release confidence and reduce manual regression effort.',
+      'Supported QA activities when needed to maintain release quality and execution velocity.',
+      'Participate in AWS-based deployment and operational workflows for reliable delivery.'
     ]
   }
 ]
@@ -105,28 +122,30 @@ export const education = [
 
 export const projects = [
   {
-    title: 'Data Compression Recommender',
-    period: 'Sep 2023 – Dec 2023',
-    description: 'ML-driven recommendation system that selects optimal compression methods based on file characteristics.',
+    title: 'Clinical Editor Autosave Reliability',
+    period: 'Greenway Health | 2025 - Present',
+    description:
+      'Worked on a multi-trigger autosave flow in an editing experience to protect user input and reduce accidental data loss.',
     highlights: [
-      'Trained a model to map file type and size to the most efficient compression algorithm.',
-      'Applied DevOps principles for deployment, monitoring, and scalability.'
+      'Implemented inactivity-based save using 2-second debounce to persist changes after users pause typing.',
+      'Implemented a 15-second interval save for long continuous typing sessions and on-blur save when users click outside the edit area.'
     ],
-    tags: ['Machine Learning', 'DevOps', 'Optimization'],
+    tags: ['Backend', 'Reliability', 'User Experience'],
     links: {
       caseStudy: '#',
       repo: '#'
     }
   },
   {
-    title: 'Route Optimization for Sustainable Infrastructure',
-    period: 'Sep 2024 – Jan 2025',
-    description: 'Satellite imagery + ML pipeline to classify terrains and generate cost maps for road planning.',
+    title: 'Recording Page Performance Optimization',
+    period: 'Greenway Health | 2025 - Present',
+    description:
+      'Worked on reducing repeated API calls on a recording workflow by shifting frequent reads to local cache with clear refresh conditions.',
     highlights: [
-      'Built terrain classification models from satellite data to quantify construction cost.',
-      'Computed least-cost routes with pathfinding to reduce environmental impact.'
+      'Loaded template, section, and primary and secondary language data from the main page once, then reused cached data locally.',
+      'Triggered refetch only when cache was missing or upstream data changed, reducing call volume and improving load time.'
     ],
-    tags: ['Remote Sensing', 'ML', 'Pathfinding'],
+    tags: ['Performance', 'Caching', 'API Efficiency'],
     links: {
       caseStudy: '#',
       repo: '#'

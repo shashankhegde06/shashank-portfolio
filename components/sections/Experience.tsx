@@ -12,9 +12,7 @@ export function Experience() {
             <div>
               <div className="text-[120px] font-display leading-none text-foreground/10">04</div>
               <p className="mt-2 text-xs uppercase tracking-[0.4em] text-muted-foreground">Experience</p>
-              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">
-                Reliability‑first delivery in healthcare AI.
-              </h2>
+              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">Professional experience as a software engineer.</h2>
             </div>
 
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
@@ -29,7 +27,7 @@ export function Experience() {
                     <p className="text-xs text-muted-foreground">{item.location}</p>
                     <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                       {item.bullets.map((bullet) => (
-                        <li key={bullet}>• {bullet}</li>
+                        <li key={bullet}>- {bullet}</li>
                       ))}
                     </ul>
                   </div>

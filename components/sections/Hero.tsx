@@ -16,14 +16,22 @@ export function Hero() {
             transition={{ duration: 0.9, ease: 'easeOut' }}
             className="space-y-6"
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">Award-level systems design</p>
+            <div className="space-y-2">
+              <p className="text-2xl font-semibold md:text-3xl">{site.name}</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
+                {site.role} | {site.location}
+              </p>
+            </div>
             <h1 className="text-5xl leading-[0.92] md:text-7xl">
-              The portfolio of a
-              <span className="block text-shimmer animate-shimmer">precision-first engineer.</span>
+              I contribute to backend engineering
+              <span className="block text-shimmer animate-shimmer">for real-world healthcare workflows.</span>
             </h1>
+            <p className="text-sm font-medium tracking-wide text-foreground/80">
+              I work like I ride: steady on the surface, careful under the hood.
+            </p>
             <p className="max-w-2xl text-lg text-muted-foreground">
-              I build AI-assisted healthcare platforms where reliability, clinician trust, and production discipline
-              are non‑negotiable.
+              I build maintainable backend systems in C# and .NET, build cross-platform apps with .NET MAUI, and support
+              AWS deployments in production environments.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -31,6 +39,12 @@ export function Hero() {
                 className="rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background shadow-halo transition hover:-translate-y-1"
               >
                 Explore work
+              </Link>
+              <Link
+                href="#contact"
+                className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:border-foreground"
+              >
+                Get in touch
               </Link>
               <a
                 href={site.resumeUrl}
@@ -49,11 +63,11 @@ export function Hero() {
           >
             <div className="glass-surface outline-glow rounded-[32px] border border-border p-6">
               <div className="flex items-center justify-between text-xs uppercase tracking-[0.35em] text-muted-foreground">
-                <span>System telemetry</span>
+                <span>Profile snapshot</span>
                 <span>2026</span>
               </div>
               <h2 className="mt-4 text-2xl font-semibold">
-                Architecting resilient EHR workflows with intelligence and empathy.
+                Engineering focused on reliability, clean code, and long-term maintainability.
               </h2>
               <div className="mt-6 grid gap-3 text-sm text-muted-foreground">
                 {highlightStats.map((item) => (
@@ -72,3 +86,4 @@ export function Hero() {
     </section>
   )
 }
+

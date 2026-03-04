@@ -1,11 +1,11 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { Section } from '@/components/Section'
 import { getAllPosts } from '@/lib/mdx'
 
 export const metadata = {
   title: 'Blog | Shashank Hegde',
-  description: 'Notes on systems, ML, and product engineering.'
+  description: 'Notes on backend systems, APIs, and software engineering.'
 }
 
 export default function BlogPage() {
@@ -28,7 +28,7 @@ export default function BlogPage() {
               >
                 <div className="flex flex-col gap-2">
                   <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                    {post.date} · {post.readingTime}
+                    {post.date} � {post.readingTime}
                   </p>
                   <h2 className="text-2xl font-semibold">{post.title}</h2>
                   <p className="text-muted-foreground">{post.excerpt}</p>
