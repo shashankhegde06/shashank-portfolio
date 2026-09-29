@@ -7,8 +7,9 @@ export async function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }))
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { frontmatter, content } = getPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const { frontmatter, content } = getPostBySlug(slug)
 
   return (
     <main>

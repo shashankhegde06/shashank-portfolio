@@ -6,7 +6,7 @@ export const site = {
   email: 'shashankhegde47@gmail.com',
   phone: '+91 8088806238',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
-  resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL || '/resume.pdf',
+  resumeUrl: 'https://drive.google.com/file/d/1WF_4jrixxPcUY2VVTkqJkziD_GCeCxeC/view?usp=sharing',
   socials: {
     linkedin: 'https://www.linkedin.com/in/shashankhegde06',
     github: 'https://github.com/shashankhegde06'
@@ -203,7 +203,7 @@ export const projects = [
       'The default assistant is a mock; model-generated answers require provider configuration. Included farming content is educational demo material, not diagnosis or treatment advice.'
     ],
     tags: ['.NET 8', 'C#', 'Blazor Server', 'ASP.NET Core', 'EF Core', 'SQLite', 'REST', 'Swagger'],
-    links: { caseStudy: '#', repo: '#' }
+    links: { caseStudy: '#', repo: 'https://github.com/shashankhegde06/KrishiMitra' }
   }
 ]
 

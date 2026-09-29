@@ -28,7 +28,7 @@ export default function BlogPage() {
               >
                 <div className="flex flex-col gap-2">
                   <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                    {post.date} · {post.readingTime}
+                    {post.date} | {post.readingTime}
                   </p>
                   <h2 className="text-2xl font-semibold">{post.title}</h2>
                   <p className="text-muted-foreground">{post.excerpt}</p>
