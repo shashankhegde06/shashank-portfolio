@@ -10,7 +10,7 @@ export function Section({
   children: React.ReactNode
 }) {
   return (
-    <section id={id} className={cn('relative isolate py-24 md:py-36', className)}>
+    <section id={id} className={cn('relative isolate py-16 md:py-24', className)}>
       {children}
     </section>
   )

@@ -1,89 +1,43 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Container } from '../Container'
-import { site, highlightStats } from '@/lib/site'
+import { useState } from 'react'
+import { ArrowDownIcon, ArrowTopRightIcon } from '@radix-ui/react-icons'
+import { site } from '@/lib/site'
 
 export function Hero() {
-  return (
-    <section className="relative overflow-hidden pb-20 pt-24 lg:pt-32">
-      <Container>
-        <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: 'easeOut' }}
-            className="space-y-6"
-          >
-            <div className="space-y-2">
-              <p className="text-2xl font-semibold md:text-3xl">{site.name}</p>
-              <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
-                {site.role} | {site.location}
-              </p>
-            </div>
-            <h1 className="text-5xl leading-[0.92] md:text-7xl">
-              I contribute to backend engineering
-              <span className="block text-shimmer animate-shimmer">for real-world healthcare workflows.</span>
-            </h1>
-            <p className="text-sm font-medium tracking-wide text-foreground/80">
-              I work like I ride: steady on the surface, careful under the hood.
-            </p>
-            <p className="max-w-2xl text-lg text-muted-foreground">
-              I build maintainable backend systems in C# and .NET, build cross-platform apps with .NET MAUI, and support
-              AWS deployments in production environments.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="#projects"
-                className="rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background shadow-halo transition hover:-translate-y-1"
-              >
-                Explore work
-              </Link>
-              <Link
-                href="#contact"
-                className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:border-foreground"
-              >
-                Get in touch
-              </Link>
-              <a
-                href={site.resumeUrl}
-                className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:border-foreground"
-              >
-                Download resume
-              </a>
-            </div>
-          </motion.div>
+  const [pointer, setPointer] = useState({ x: 50, y: 50 })
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-            className="relative"
-          >
-            <div className="glass-surface outline-glow rounded-[32px] border border-border p-6">
-              <div className="flex items-center justify-between text-xs uppercase tracking-[0.35em] text-muted-foreground">
-                <span>Profile snapshot</span>
-                <span>2026</span>
-              </div>
-              <h2 className="mt-4 text-2xl font-semibold">
-                Engineering focused on reliability, clean code, and long-term maintainability.
-              </h2>
-              <div className="mt-6 grid gap-3 text-sm text-muted-foreground">
-                {highlightStats.map((item) => (
-                  <div key={item.label} className="flex items-center justify-between">
-                    <span>{item.label}</span>
-                    <span className="text-foreground">{item.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="absolute -right-8 top-10 h-20 w-20 rounded-3xl border border-border bg-card/80 shadow-halo" />
-            <div className="absolute -left-10 bottom-8 h-28 w-28 rounded-full border border-border bg-card/70 shadow-halo" />
-          </motion.div>
+  function movePortrait(event: React.MouseEvent<HTMLElement>) {
+    const rect = event.currentTarget.getBoundingClientRect()
+    setPointer({ x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 })
+  }
+
+  return (
+    <section className="editorial-hero relative isolate overflow-hidden" onMouseMove={movePortrait}>
+      <div className="hero-grain" aria-hidden="true" />
+      <div className="hero-topline"><span>SH / SOFTWARE ENGINEER</span><span>BASED IN BENGALURU · {new Date().getFullYear()}</span></div>
+      <div className="hero-stage">
+        <div className="hero-copy">
+          <p className="hero-kicker"><i /> Building software for people who care for people</p>
+          <h1><span>Shashank</span><em>Hegde</em></h1>
+          <p className="hero-intro">I turn complex healthcare workflows into dependable software. Backend systems, thoughtful details, and a little bit of obsession with getting it right.</p>
+          <div className="hero-actions">
+            <Link href="#projects" className="hero-primary">Explore my work <ArrowDownIcon /></Link>
+            <a href={site.resumeUrl} className="hero-resume">Résumé <ArrowTopRightIcon /></a>
+          </div>
+          <div className="hero-location"><span className="hero-status"><i /> Open to meaningful conversations</span><span> C# / .NET / HEALTHCARE</span></div>
         </div>
-      </Container>
+        <div className="portrait-stage" style={{ '--pointer-x': `${pointer.x}%`, '--pointer-y': `${pointer.y}%` } as React.CSSProperties}>
+          <div className="portrait-orbit orbit-one" /><div className="portrait-orbit orbit-two" />
+          <div className="portrait-image-wrap"><Image src="/shashank-portrait.png" alt="Shashank Hegde, software engineer" fill priority sizes="(max-width: 900px) 90vw, 54vw" className="portrait-image" /></div>
+          <span className="portrait-stamp">BENGALURU<br />INDIA · 2026</span>
+          <span className="portrait-side-note">ENGINEER / BUILDER / CURIOUS HUMAN</span>
+        </div>
+        <div className="hero-big-name" aria-hidden="true">SHASHANK<span>®</span></div>
+      </div>
+      <a href="#about" className="hero-scroll-bridge"><span className="bridge-label">THE PERSON BEHIND THE SYSTEMS</span><span className="bridge-center">Scroll to explore <i><ArrowDownIcon /></i></span><span className="bridge-coordinate">01 — 06</span></a>
     </section>
   )
 }
-

@@ -1,93 +1,62 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import { ArrowTopRightIcon, CheckIcon, CopyIcon, EnvelopeClosedIcon } from '@radix-ui/react-icons'
 import { Container } from '../Container'
 import { Section } from '../Section'
 import { Reveal } from '../Reveal'
 import { site } from '@/lib/site'
 
 export function Contact() {
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle')
+  const resetTimer = useRef<number | null>(null)
+
+  useEffect(() => () => {
+    if (resetTimer.current !== null) window.clearTimeout(resetTimer.current)
+  }, [])
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(site.email)
+      setCopyState('copied')
+    } catch {
+      setCopyState('failed')
+    }
+
+    if (resetTimer.current !== null) window.clearTimeout(resetTimer.current)
+    resetTimer.current = window.setTimeout(() => setCopyState('idle'), 2400)
+  }
+
+  const copyLabel = copyState === 'copied' ? 'Copied' : copyState === 'failed' ? 'Try again' : 'Copy email'
+
   return (
-    <Section id="contact">
+    <Section id="contact" className="contact-section bg-primary text-primary-foreground">
       <Container>
         <Reveal>
-          <div className="grid gap-10 lg:grid-cols-[0.6fr_1.4fr]">
+          <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
             <div>
-              <div className="text-[120px] font-display leading-none text-foreground/10">05</div>
-              <p className="mt-2 text-xs uppercase tracking-[0.4em] text-muted-foreground">Contact</p>
-              <h2 className="mt-6 text-3xl font-semibold md:text-4xl">Open to meaningful connections and opportunities.</h2>
-              <p className="mt-4 text-muted-foreground">
-                I am open to software engineering roles, technical conversations, and learning opportunities.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href={`mailto:${site.email}`}
-                  className="rounded-full border border-border bg-background/70 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition hover:-translate-y-0.5 hover:border-foreground hover:bg-background"
-                >
-                  Email me directly
-                </a>
-                <a
-                  href={site.socials.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-border bg-background/70 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition hover:-translate-y-0.5 hover:border-foreground hover:bg-background"
-                >
-                  Connect on LinkedIn
-                </a>
-              </div>
-              <div className="mt-6 space-y-3 text-sm">
-                <div className="flex items-center justify-between rounded-2xl border border-border bg-background/60 px-5 py-4">
-                  <span>Email</span>
-                  <span className="text-muted-foreground">{site.email}</span>
-                </div>
-                <div className="flex items-center justify-between rounded-2xl border border-border bg-background/60 px-5 py-4">
-                  <span>Location</span>
-                  <span className="text-muted-foreground">{site.location}</span>
-                </div>
-              </div>
+              <p className="eyebrow flex items-center gap-3 text-accent"><span className="h-px w-8 bg-accent" /> Get in touch</p>
+              <h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-6xl">Let’s build something that matters.</h2>
+              <p className="mt-5 max-w-xl leading-7 text-primary-foreground/75">Open to thoughtful conversations about software engineering, healthcare technology, and good product work.</p>
             </div>
-
-            <form
-              action={`mailto:${site.email}`}
-              method="post"
-              encType="text/plain"
-              className="glass-surface outline-glow rounded-3xl border border-border p-6 space-y-4"
-            >
-              <div className="grid gap-4 md:grid-cols-2">
-                <input
-                  name="name"
-                  placeholder="Name"
-                  aria-label="Name"
-                  required
-                  className="h-12 rounded-2xl border border-border bg-background/70 px-4 text-sm outline-none transition focus-visible:shadow-focus"
-                />
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  aria-label="Email"
-                  required
-                  className="h-12 rounded-2xl border border-border bg-background/70 px-4 text-sm outline-none transition focus-visible:shadow-focus"
-                />
-              </div>
-              <input
-                name="subject"
-                placeholder="Subject"
-                aria-label="Subject"
-                className="h-12 w-full rounded-2xl border border-border bg-background/70 px-4 text-sm outline-none transition focus-visible:shadow-focus"
-              />
-              <textarea
-                name="message"
-                placeholder="Write your message..."
-                aria-label="Message"
-                rows={4}
-                className="w-full rounded-2xl border border-border bg-background/70 px-4 py-3 text-sm outline-none transition focus-visible:shadow-focus"
-              />
+            <div className="flex flex-wrap items-center gap-3">
+              <a href={`mailto:${site.email}`} className="group inline-flex min-h-12 items-center gap-3 border border-primary-foreground/35 px-5 py-3 text-base font-semibold transition hover:border-accent hover:bg-primary-foreground/5">
+                <EnvelopeClosedIcon aria-hidden="true" /> {site.email} <ArrowTopRightIcon aria-hidden="true" className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </a>
               <button
-                type="submit"
-                className="w-full rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background shadow-halo transition hover:-translate-y-1"
+                type="button"
+                onClick={copyEmail}
+                aria-label={copyState === 'copied' ? 'Email address copied' : 'Copy email address'}
+                title={copyState === 'failed' ? 'Clipboard access failed. Try again.' : copyLabel}
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-primary-foreground/35 px-4 py-3 text-base font-semibold transition hover:border-accent hover:bg-primary-foreground/5 active:scale-[0.98]"
               >
-                Open email draft
+                {copyState === 'copied' ? <CheckIcon aria-hidden="true" /> : <CopyIcon aria-hidden="true" />}
+                {copyLabel}
               </button>
-              <p className="text-xs text-muted-foreground">This form opens your email client with a prefilled message.</p>
-            </form>
+              <span className="sr-only" role="status" aria-live="polite">
+                {copyState === 'copied' ? 'Email address copied to clipboard.' : copyState === 'failed' ? 'Could not copy email address.' : ''}
+              </span>
+            </div>
           </div>
         </Reveal>
       </Container>
