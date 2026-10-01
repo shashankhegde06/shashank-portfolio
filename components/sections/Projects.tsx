@@ -25,7 +25,7 @@ export function Projects() {
         <Reveal>
           <div className="mb-12 flex flex-col justify-between gap-5 md:mb-16 md:flex-row md:items-end">
             <div>
-              <p className="eyebrow flex items-center gap-3 text-primary"><span className="h-px w-8 bg-primary" /> Selected work</p>
+              <p className="section-index"><i /> Selected work <span>02</span></p>
               <h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl">Thoughtful engineering, put to work.</h2>
             </div>
             <p className="max-w-sm text-base leading-7 text-muted-foreground">A few examples of systems and product improvements built for real healthcare and infrastructure workflows.</p>

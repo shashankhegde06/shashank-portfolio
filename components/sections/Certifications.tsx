@@ -11,7 +11,7 @@ export function Certifications() {
         <Reveal>
           <div className="certification-heading">
             <div>
-              <p className="eyebrow flex items-center gap-3 text-primary"><span className="h-px w-8 bg-primary" /> Learning in practice</p>
+              <p className="section-index"><i /> Learning in practice <span>05</span></p>
               <h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl">Certifications<span className="text-primary">.</span></h2>
             </div>
             <span className="certification-count">{String(certifications.length).padStart(2, '0')} CREDENTIAL{certifications.length === 1 ? '' : 'S'}</span>

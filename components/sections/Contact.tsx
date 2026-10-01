@@ -43,6 +43,9 @@ export function Contact() {
               <a href={`mailto:${site.email}`} className="group inline-flex min-h-12 items-center gap-3 border border-primary-foreground/35 px-5 py-3 text-base font-semibold transition hover:border-accent hover:bg-primary-foreground/5">
                 <EnvelopeClosedIcon aria-hidden="true" /> {site.email} <ArrowTopRightIcon aria-hidden="true" className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </a>
+              <a href={site.socials.linkedin} target="_blank" rel="noreferrer" className="group inline-flex min-h-12 items-center gap-3 border border-primary-foreground/35 px-5 py-3 text-base font-semibold transition hover:border-accent hover:bg-primary-foreground/5">
+                LinkedIn <ArrowTopRightIcon aria-hidden="true" className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </a>
               <button
                 type="button"
                 onClick={copyEmail}

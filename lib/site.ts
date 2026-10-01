@@ -5,8 +5,8 @@ export const site = {
   location: 'Bengaluru, India',
   email: 'shashankhegde47@gmail.com',
   phone: '+91 8088806238',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
-  resumeUrl: 'https://drive.google.com/file/d/1WF_4jrixxPcUY2VVTkqJkziD_GCeCxeC/view?usp=sharing',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://shashank-hegde.vercel.app',
+  resumeUrl: '/resume.pdf',
   socials: {
     linkedin: 'https://www.linkedin.com/in/shashankhegde06',
     github: 'https://github.com/shashankhegde06'
@@ -20,9 +20,9 @@ export const site = {
 
 export const navItems = [
   { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
+  { href: '#projects', label: 'Project' },
   { href: '#experience', label: 'Experience' },
+  { href: '#skills', label: 'Skills' },
   { href: '#certifications', label: 'Certifications' },
   { href: '#contact', label: 'Contact' }
 ]
@@ -67,7 +67,7 @@ export const skills = {
   databases: ['DynamoDB', 'MySQL'],
   tools: ['Visual Studio', 'Visual Studio Code', 'Jupyter Notebook'],
   platforms: ['AWS'],
-  aiTools: ['AI Agents', 'Copilot', 'ChatGPT', 'Claude', 'Manual Validation'],
+  aiTools: ['AI Agents', 'Copilot', 'ChatGPT', 'Claude', 'Automated Testing'],
   subjects: [
     'Data Structures and Algorithms',
     'Computer Networks',
@@ -94,12 +94,8 @@ export const experience = [
     bullets: [
       'Develop and maintain backend services using C# and .NET for healthcare software workflows in a production EHR environment.',
       'Build and enhance REST APIs with a focus on performance, readability, maintainability, and reliable service integration.',
-      'Delivered Novare Notifications end to end, translating the PRD into a complete working feature. Used AI agents to accelerate implementation and reviewed and validated their output.',
-      'Implemented autosave in a clinical editing workflow: after 2 seconds of inactivity, every 15 seconds during continuous editing, and when users leave the editing area.',
-      'Improved recording-page performance by caching templates, sections, and primary and secondary language selections locally; refetch when cached data is missing or upstream data changes.',
       'Contribute to data migration and validation to support accurate transitions and data integrity.',
       'Contribute to automated testing and quality assurance to improve release confidence and reduce reliance on manual regression testing.',
-      'Support AWS deployment and operational workflows, including work with cloud application components and data services.',
       'Deliver interface improvements that make healthcare workflows clearer and easier to navigate.',
       'Apply practical knowledge of EHR and clinical workflows to feature development and troubleshooting.'
     ]
@@ -227,12 +223,12 @@ export const certifications = [
     title: 'AWS Academy Graduate',
     program: 'AWS Academy Cloud Foundations',
     provider: 'Amazon Web Services',
-    credentialUrl: 'https://drive.google.com/drive/u/1/folders/1zuw3LWeOvY2xEpr0skg_uAgdn2B_ZFmJ'
+    credentialUrl: 'https://drive.google.com/file/d/1wwLSAQt8LngjfYzMruRSNQ9u8rnASsvS/view?usp=sharing'
   },
   {
     title: 'Data Structures and Backend with Java',
     program: 'Backend development with Java',
     provider: 'Coursera',
-    credentialUrl: 'https://drive.google.com/drive/u/1/folders/1zuw3LWeOvY2xEpr0skg_uAgdn2B_ZFmJ'
+    credentialUrl: 'https://drive.google.com/file/d/18mzbnBHi916VpxzgzHwoGT5C18o1S6Vn/view?usp=sharing'
   }
 ]

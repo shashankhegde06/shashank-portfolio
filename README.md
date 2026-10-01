@@ -25,15 +25,11 @@ npm start
 ## Deployment (Vercel)
 1. Push the repo to GitHub.
 2. Import in Vercel.
-3. Set the Production Domain and update:
-   - `app/layout.tsx` metadataBase
-   - `app/robots.ts` sitemap URL
-   - `app/sitemap.ts` baseUrl
+3. Set `NEXT_PUBLIC_SITE_URL` to the production domain in Vercel. This value is used for metadata, the sitemap, and robots.txt.
 
 ## Content updates
-- Edit resume data in `lib/site.ts`.
+- Replace `public/resume.pdf` to update the resume linked from the hero and header.
 - Add blog posts in `content/blog/*.mdx`.
-- Replace `public/resume.pdf` with the latest resume.
 
 ## Notes
 - Replace `site.socials.linkedin` and `site.socials.github` with your real links.

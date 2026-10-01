@@ -15,12 +15,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${site.name} | Portfolio`,
     description: site.positioning,
-    type: 'website'
+    type: 'website',
+    images: ['/opengraph-image']
   },
   twitter: {
     card: 'summary_large_image',
     title: `${site.name} | Portfolio`,
-    description: site.positioning
+    description: site.positioning,
+    images: ['/opengraph-image']
   }
 }
 

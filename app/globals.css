@@ -201,7 +201,7 @@ a {
 .about-layout { position:relative; display:grid; gap:3.5rem; grid-template-columns:.9fr 1.1fr; }
 .section-watermark { position:absolute; top:-7rem; left:-2rem; color:rgba(255,255,255,.035); font:900 clamp(14rem,36vw,34rem)/1 var(--font-sans); letter-spacing:-.12em; pointer-events:none; }
 .about-heading,.about-story { position:relative; z-index:1; }
-.section-index { display:flex; align-items:center; gap:.65rem; color:#ed8176; font:600 .67rem/1.4 var(--font-sans); letter-spacing:.14em; text-transform:uppercase; }
+.section-index { display:flex; width:24rem; max-width:100%; align-items:center; gap:.65rem; color:#ed8176; font:600 .67rem/1.4 var(--font-sans); letter-spacing:.14em; text-transform:uppercase; }
 .section-index i { width:.42rem; height:.42rem; border-radius:50%; background:#d84234; box-shadow:0 0 0 5px rgba(216,66,52,.18); }
 .section-index span { margin-left:auto; color:rgba(255,255,255,.4); }
 .about-heading h2 { margin-top:2rem; font:700 clamp(3.2rem,6.4vw,6.5rem)/.98 var(--font-sans); letter-spacing:-.075em; }

@@ -27,7 +27,7 @@ export function Hero() {
             <Link href="#projects" className="hero-primary">Explore my work <ArrowDownIcon /></Link>
             <a href={site.resumeUrl} className="hero-resume">Résumé <ArrowTopRightIcon /></a>
           </div>
-          <div className="hero-location"><span className="hero-status"><i /> Open to meaningful conversations</span><span> C# / .NET / HEALTHCARE</span></div>
+          <div className="hero-location"><span className="hero-status"><i /> Open to backend / .NET roles in Bengaluru or remote</span><span> C# / .NET / HEALTHCARE</span></div>
         </div>
         <div className="portrait-stage" style={{ '--pointer-x': `${pointer.x}%`, '--pointer-y': `${pointer.y}%` } as React.CSSProperties}>
           <div className="portrait-orbit orbit-one" /><div className="portrait-orbit orbit-two" />
@@ -37,7 +37,7 @@ export function Hero() {
         </div>
         <div className="hero-big-name" aria-hidden="true">SHASHANK<span>®</span></div>
       </div>
-      <a href="#about" className="hero-scroll-bridge"><span className="bridge-label">THE PERSON BEHIND THE SYSTEMS</span><span className="bridge-center">Scroll to explore <i><ArrowDownIcon /></i></span><span className="bridge-coordinate">01 — 06</span></a>
+      <a href="#about" className="hero-scroll-bridge"><span className="bridge-label">THE PERSON BEHIND THE SYSTEMS</span><span className="bridge-center">Scroll to explore <i><ArrowDownIcon /></i></span><span className="bridge-coordinate">01 - 05</span></a>
     </section>
   )
 }

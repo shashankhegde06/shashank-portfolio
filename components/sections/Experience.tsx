@@ -10,7 +10,7 @@ export function Experience() {
         <Reveal>
           <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
             <div className="max-w-sm">
-              <p className="eyebrow flex items-center gap-3 text-primary"><span className="h-px w-8 bg-primary" /> Experience</p>
+              <p className="section-index"><i /> Experience <span>03</span></p>
               <h2 className="mt-5 text-4xl font-semibold leading-tight tracking-[-0.04em]">Growing with the work.</h2>
               <p className="mt-4 leading-7 text-muted-foreground">From an engineering internship to building production software for healthcare teams.</p>
               <div className="mt-10 border-t border-border pt-6">

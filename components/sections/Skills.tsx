@@ -19,7 +19,7 @@ export function Skills() {
         <Reveal>
           <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
             <div className="max-w-sm">
-              <p className="eyebrow flex items-center gap-3 text-primary"><span className="h-px w-8 bg-primary" /> Toolkit</p>
+              <p className="section-index"><i /> Toolkit <span>04</span></p>
               <h2 className="mt-5 text-4xl font-semibold leading-tight tracking-[-0.04em]">The tools behind the work.</h2>
               <p className="mt-4 leading-7 text-muted-foreground">A practical foundation across software development, cloud platforms, and core computer science.</p>
             </div>
