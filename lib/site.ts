@@ -140,6 +140,7 @@ export const projects = [
       'Surfaced high-priority tasks assigned to the provider and high-priority unassigned tasks that require attention.'
     ],
     tags: ['C#', '.NET', 'REST APIs', 'Healthcare'],
+    screenshots: [],
     links: { caseStudy: '#', repo: '#' }
   },
   {
@@ -153,6 +154,7 @@ export const projects = [
       'Implemented a 15-second interval save for long continuous typing sessions and on-blur save when users click outside the edit area.'
     ],
     tags: ['Backend', 'Reliability', 'User Experience'],
+    screenshots: [],
     links: {
       caseStudy: '#',
       repo: '#'
@@ -169,6 +171,7 @@ export const projects = [
       'Triggered refetch only when cache was missing or upstream data changed, reducing call volume and improving load time.'
     ],
     tags: ['Performance', 'Caching', 'API Efficiency'],
+    screenshots: [],
     links: {
       caseStudy: '#',
       repo: '#'
@@ -184,21 +187,46 @@ export const projects = [
       'Applied pathfinding algorithms to identify least-cost routes and support lower-impact infrastructure planning.'
     ],
     tags: ['Machine Learning', 'Satellite Imagery', 'Pathfinding'],
+    screenshots: [],
     links: { caseStudy: '#', repo: 'https://github.com/shashankhegde06/Route-Management' }
+  },
+  {
+    title: 'DevTrack',
+    category: 'Personal',
+    period: 'Personal project',
+    description: 'A Windows desktop app for keeping a software job search organized. Track applications, interviews, and follow-ups in one place, with all data stored locally in SQLite.',
+    highlights: [
+      'Built a React, TypeScript, and Electron desktop interface backed by an ASP.NET Core API and EF Core.',
+      'Added application table and drag-and-drop board views, global search, advanced filters, and company management.',
+      'Created interview and follow-up workflows, analytics dashboards, CSV exports, and JSON backup and restore.',
+      'Designed for one local user: the API binds to the local computer and the app starts with an empty database. Screenshots show documentation examples.'
+    ],
+    tags: ['.NET 10', 'ASP.NET Core', 'React', 'TypeScript', 'Electron', 'SQLite', 'EF Core'],
+    screenshots: [
+      { src: '/devtrack-dashboard.png', label: 'Dashboard', alt: 'DevTrack dashboard with application metrics, activity chart, and job search pipeline', aspect: 'wide' },
+      { src: '/devtrack-add-application.png', label: 'Add application', alt: 'DevTrack form for adding a job application', aspect: 'wide' }
+    ],
+    links: { caseStudy: '#', repo: 'https://github.com/shashankhegde06/DevTrack' }
   },
   {
     title: 'KrishiMitra',
     category: 'Personal',
     period: 'Personal project',
-    description: 'A Kannada-first farming companion for arecanut growers in Karnataka, bringing farm records, activity and expense tracking, reminders, agricultural reference material, and bilingual Q&A together in one application.',
+    description: 'A Kannada-first digital farming companion for arecanut growers in Karnataka. Manage farm records and reminders, view reported crop prices from nearby markets, and browse recent agriculture news.',
     highlights: [
-      'Built an end-to-end flow from interactive Blazor Server components through an ASP.NET Core REST API to SQLite persistence with EF Core migrations and seeded demo data.',
-      'Added validated CRUD workflows for farm profiles, activities, expenses, and reminders, plus a dashboard for recent farm updates.',
+      'Built an end-to-end application with an interactive Blazor Server interface, an ASP.NET Core REST API, and SQLite persistence using EF Core migrations.',
+      'Added farm profile, activity, expense, and reminder management, with a dashboard for recent farm updates.',
+      'Added reported crop price observations from nearby markets and a feed of recent agriculture news.',
       'Structured the solution into Web, API, Core, and Infrastructure projects to keep UI, API, business contracts, and data concerns separate.',
-      'Added keyword-based retrieval over a small knowledge collection and a configurable assistant that can run in predictable mock mode or use an OpenAI-compatible chat API.',
-      'The default assistant is a mock; model-generated answers require provider configuration. Included farming content is educational demo material, not diagnosis or treatment advice.'
+      'Included a local Q&A prototype; connecting AI APIs to provide AI-powered farming answers is planned for a future release.',
+      'Supports Kannada and English. Market reports and news are informational and may need local verification.'
     ],
-    tags: ['.NET 8', 'C#', 'Blazor Server', 'ASP.NET Core', 'EF Core', 'SQLite', 'REST', 'Swagger'],
+    tags: ['.NET 8', 'C#', 'Blazor Server', 'ASP.NET Core', 'EF Core', 'SQLite', 'Market Data', 'Agriculture News', 'Kannada'],
+    screenshots: [
+      { src: '/krishimitra-dashboard.png', label: 'Dashboard', alt: 'KrishiMitra farm dashboard with crop and land summaries, farm assistant, reminders, and recent activity', aspect: 'standard' },
+      { src: '/krishimitra-activities.png', label: 'Farm activities', alt: 'KrishiMitra farm activities page with activity records and expense filters', aspect: 'standard' },
+      { src: '/krishimitra-market-news.png', label: 'Market prices and news', alt: 'KrishiMitra nearby market price reports for arecanut and recent agriculture news', aspect: 'standard' }
+    ],
     links: { caseStudy: '#', repo: 'https://github.com/shashankhegde06/KrishiMitra' }
   }
 ]

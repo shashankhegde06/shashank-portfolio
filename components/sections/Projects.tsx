@@ -1,6 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Container } from '../Container'
 import { Section } from '../Section'
 import { Reveal } from '../Reveal'
@@ -9,6 +11,8 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 
 export function Projects() {
   const [category, setCategory] = useState<'All' | 'Professional' | 'Academic' | 'Personal'>('All')
+  const [activeScreenshots, setActiveScreenshots] = useState<Record<string, number>>({})
+  const reduceMotion = useReducedMotion()
   const visibleProjects = projects.filter((project) => category === 'All' || project.category === category)
   const featured = category === 'All' || category === 'Professional' ? visibleProjects[0] : null
   const otherProjects = category === 'Academic' || category === 'Personal' ? visibleProjects : visibleProjects.slice(1)
@@ -38,15 +42,16 @@ export function Projects() {
             const count = filter.value === 'All' ? projects.length : projects.filter((project) => project.category === filter.value).length
             const selected = category === filter.value
             return (
-              <button
+              <motion.button
                 key={filter.value}
                 type="button"
                 aria-pressed={selected}
                 onClick={() => setCategory(filter.value)}
-                className={`inline-flex min-h-11 items-center gap-2 border px-4 text-sm font-medium transition duration-200 active:scale-[0.98] ${selected ? 'border-primary bg-primary text-primary-foreground' : 'border-border bg-card text-muted-foreground hover:border-primary hover:text-primary'}`}
+                className={`relative isolate inline-flex min-h-11 items-center gap-2 overflow-hidden border px-4 text-sm font-medium transition duration-200 active:scale-[0.98] ${selected ? 'border-primary text-primary-foreground' : 'border-border bg-card text-muted-foreground hover:border-primary hover:text-primary'}`}
               >
-                {filter.label}<span className={selected ? 'text-primary-foreground/70' : 'text-muted-foreground/70'}>{count}</span>
-              </button>
+                {selected && <motion.span layoutId="project-filter-highlight" className="absolute inset-0 z-0 bg-primary" transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 34 }} />}
+                <span className="relative z-10">{filter.label}</span><span className={`relative z-10 ${selected ? 'text-primary-foreground/70' : 'text-muted-foreground/70'}`}>{count}</span>
+              </motion.button>
             )
           })}
           <span className="sr-only" aria-live="polite">Showing {visibleProjects.length} projects</span>
@@ -88,10 +93,60 @@ export function Projects() {
           </Reveal>
         )}
 
-        <div className="mt-5 grid gap-5 md:grid-cols-2">
-          {otherProjects.map((project, index) => (
-            <Reveal key={project.title} delay={index * 0.06}>
-              <article className="project-card flex h-full flex-col border border-border bg-card p-6 transition duration-200 hover:-translate-y-1 hover:border-primary/50 sm:p-8">
+        <motion.div layout className="relative mt-5 grid gap-5 md:grid-cols-2">
+          <AnimatePresence mode="popLayout" initial={false}>
+          {otherProjects.map((project, index) => {
+            const screenshotIndex = activeScreenshots[project.title] ?? 0
+            const screenshot = project.screenshots[screenshotIndex]
+
+            return (
+            <motion.div
+              key={project.title}
+              layout={!reduceMotion}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-8% 0px' }}
+              exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
+              transition={{ duration: reduceMotion ? 0.01 : 0.35, delay: reduceMotion ? 0 : index * 0.045 }}
+              className="h-full"
+            >
+              <article className="project-card group flex h-full flex-col border border-border bg-card p-6 transition duration-200 hover:-translate-y-1 hover:border-primary/50 sm:p-8">
+                {screenshot && (
+                  <div className="mb-6 overflow-hidden border border-border bg-muted">
+                    <motion.div
+                      key={`${project.title}-${screenshotIndex}`}
+                      initial={reduceMotion ? false : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: reduceMotion ? 0.01 : 0.22 }}
+                      className={`relative overflow-hidden ${screenshot.aspect === 'standard' ? 'aspect-[4/3]' : 'aspect-[16/9]'}`}
+                    >
+                      <Image
+                        src={screenshot.src}
+                        alt={screenshot.alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+                      />
+                      <span className="absolute bottom-3 left-3 bg-background/90 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-foreground backdrop-blur-sm">{screenshot.label} preview</span>
+                    </motion.div>
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-3 py-2.5">
+                      <span className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Screenshots</span>
+                      <div className="flex gap-1.5" role="group" aria-label={`Choose ${project.title} screenshot`}>
+                        {project.screenshots.map((item, itemIndex) => (
+                          <button
+                            key={item.src}
+                            type="button"
+                            aria-pressed={screenshotIndex === itemIndex}
+                            onClick={() => setActiveScreenshots((current) => ({ ...current, [project.title]: itemIndex }))}
+                            className={`min-h-9 border px-2.5 text-xs font-medium transition ${screenshotIndex === itemIndex ? 'border-primary bg-primary text-primary-foreground' : 'border-border text-muted-foreground hover:border-primary hover:text-primary'}`}
+                          >
+                            {item.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground"><span>{project.period}</span><span className="font-mono">0{index + (category === 'Academic' || category === 'Personal' ? 1 : 2)}</span></div>
                 <h3 className="mt-6 max-w-md text-2xl font-semibold tracking-[-0.025em]">{project.title}</h3>
                 <p className="mt-3 text-base leading-7 text-muted-foreground">{project.description}</p>
@@ -101,9 +156,11 @@ export function Projects() {
                 <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2 border-t border-border pt-5">{project.tags.map((tag) => <span key={tag} className="text-sm font-medium text-muted-foreground">{tag}</span>)}</div>
                 {project.links.repo !== '#' && <a href={project.links.repo} target="_blank" rel="noreferrer" className="project-repo-link mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary">GitHub repository <ArrowTopRightIcon aria-hidden="true" /></a>}
               </article>
-            </Reveal>
-          ))}
-        </div>
+            </motion.div>
+          )
+          })}
+          </AnimatePresence>
+        </motion.div>
       </Container>
     </Section>
   )

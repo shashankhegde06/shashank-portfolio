@@ -7,6 +7,7 @@ import { Container } from './Container'
 import { ThemeToggle } from './ThemeToggle'
 import { site, navItems } from '@/lib/site'
 import { ScrollProgress } from './ScrollProgress'
+import { QuickNav } from './QuickNav'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -58,6 +59,7 @@ export function Header() {
           {navItems.map((item) => <a key={item.href} href={item.href} aria-current={activeSection === item.href.slice(1) ? 'location' : undefined} className="inline-flex h-full items-center border-b-2 border-transparent text-base text-muted-foreground transition hover:border-primary hover:text-primary aria-[current=location]:border-primary aria-[current=location]:text-primary">{item.label}</a>)}
         </nav>
         <div className="flex items-center gap-2">
+          <QuickNav />
           <ThemeToggle />
           <a href={site.resumeUrl} className="hidden items-center border border-primary px-4 py-2 text-sm font-semibold text-primary transition duration-200 hover:bg-primary hover:text-primary-foreground active:scale-[0.98] sm:inline-flex">Resume</a>
           <button type="button" aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen((prev) => !prev)} className="flex h-11 w-11 items-center justify-center border border-border md:hidden">
