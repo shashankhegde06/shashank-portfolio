@@ -6,10 +6,11 @@ import { SkipToContent } from '@/components/SkipToContent'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { BackToTop } from '@/components/BackToTop'
+import { ScrollTraveler } from '@/components/ScrollTraveler'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: `${site.name} | Portfolio`,
+  title: `${site.name} — Software Engineer | C# & .NET`,
   description: site.positioning,
   metadataBase: new URL(site.url),
   openGraph: {
@@ -38,6 +39,7 @@ export default function RootLayout({
           <SkipToContent />
           <Background />
           <Header />
+          <ScrollTraveler />
           {children}
           <Footer />
           <BackToTop />

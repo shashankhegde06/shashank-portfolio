@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Container } from '../Container'
 import { Section } from '../Section'
@@ -9,10 +9,17 @@ import { Reveal } from '../Reveal'
 import { projects } from '@/lib/site'
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 
+type ProjectScreenshot = { src: string; label: string; alt: string; aspect: string }
+type ScreenshotViewer = { title: string; screenshots: ProjectScreenshot[]; index: number }
+
 export function Projects() {
   const [category, setCategory] = useState<'All' | 'Professional' | 'Academic' | 'Personal'>('All')
   const [activeScreenshots, setActiveScreenshots] = useState<Record<string, number>>({})
+  const [screenshotViewer, setScreenshotViewer] = useState<ScreenshotViewer | null>(null)
+  const isScreenshotViewerOpen = screenshotViewer !== null
   const reduceMotion = useReducedMotion()
+  const viewerRef = useRef<HTMLDivElement>(null)
+  const viewerCloseRef = useRef<HTMLButtonElement>(null)
   const visibleProjects = projects.filter((project) => category === 'All' || project.category === category)
   const featured = category === 'All' || category === 'Professional' ? visibleProjects[0] : null
   const otherProjects = category === 'Academic' || category === 'Personal' ? visibleProjects : visibleProjects.slice(1)
@@ -22,6 +29,50 @@ export function Projects() {
     { label: 'Academic', value: 'Academic' as const },
     { label: 'Personal', value: 'Personal' as const }
   ]
+
+  useEffect(() => {
+    if (!screenshotViewer) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setScreenshotViewer(null)
+      if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        setScreenshotViewer((current) => current ? { ...current, index: (current.index + 1) % current.screenshots.length } : null)
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        setScreenshotViewer((current) => current ? { ...current, index: (current.index - 1 + current.screenshots.length) % current.screenshots.length } : null)
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [screenshotViewer])
+
+  useEffect(() => {
+    if (!isScreenshotViewerOpen) return
+    const previousFocus = document.activeElement as HTMLElement | null
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    viewerCloseRef.current?.focus()
+    return () => {
+      document.body.style.overflow = previousOverflow
+      previousFocus?.focus()
+    }
+  }, [isScreenshotViewerOpen])
+
+  function trapViewerFocus(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key !== 'Tab' || !viewerRef.current) return
+    const focusable = Array.from(viewerRef.current.querySelectorAll<HTMLElement>('button:not([disabled])'))
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (!first || !last) return
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault()
+      last.focus()
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  }
 
   return (
     <Section id="projects" className="bg-muted/45">
@@ -120,14 +171,21 @@ export function Projects() {
                       transition={{ duration: reduceMotion ? 0.01 : 0.22 }}
                       className={`relative overflow-hidden ${screenshot.aspect === 'standard' ? 'aspect-[4/3]' : 'aspect-[16/9]'}`}
                     >
-                      <Image
-                        src={screenshot.src}
-                        alt={screenshot.alt}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
-                      />
-                      <span className="absolute bottom-3 left-3 bg-background/90 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-foreground backdrop-blur-sm">{screenshot.label} preview</span>
+                      <button
+                        type="button"
+                        onClick={() => setScreenshotViewer({ title: project.title, screenshots: project.screenshots, index: screenshotIndex })}
+                        aria-label={`Enlarge ${project.title} ${screenshot.label} screenshot`}
+                        className="absolute inset-0 cursor-zoom-in text-left focus-visible:outline-none"
+                      >
+                        <Image
+                          src={screenshot.src}
+                          alt={screenshot.alt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+                        />
+                        <span className="absolute bottom-3 left-3 bg-background/90 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-foreground backdrop-blur-sm">{screenshot.label} preview · click to enlarge</span>
+                      </button>
                     </motion.div>
                     <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-3 py-2.5">
                       <span className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Screenshots</span>
@@ -161,6 +219,69 @@ export function Projects() {
           })}
           </AnimatePresence>
         </motion.div>
+        {screenshotViewer && (
+          <div
+            className="screenshot-viewer-backdrop fixed inset-0 z-[120] flex items-center justify-center bg-black/85 p-4 backdrop-blur-md sm:p-8"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setScreenshotViewer(null)
+            }}
+          >
+            <div
+              ref={viewerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${screenshotViewer.title} screenshot viewer`}
+              onKeyDown={trapViewerFocus}
+              className="screenshot-viewer-dialog relative flex h-[min(88vh,56rem)] max-h-full w-full max-w-6xl flex-col overflow-hidden border border-white/15 bg-[#111210] text-white shadow-2xl"
+            >
+              <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3 sm:px-6">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold sm:text-base">{screenshotViewer.title}</p>
+                  <p className="mt-0.5 text-xs text-white/55">{screenshotViewer.screenshots[screenshotViewer.index].label} · {screenshotViewer.index + 1} of {screenshotViewer.screenshots.length}</p>
+                </div>
+                <button
+                  ref={viewerCloseRef}
+                  type="button"
+                  onClick={() => setScreenshotViewer(null)}
+                  aria-label="Close screenshot viewer"
+                  className="flex h-10 shrink-0 items-center gap-2 border border-white/20 px-3 text-sm transition hover:border-white/50 hover:bg-white/10 focus-visible:outline-none"
+                >
+                  <span aria-hidden="true">×</span><span className="hidden sm:inline">Close</span>
+                </button>
+              </div>
+              <div className="relative flex min-h-0 flex-1 items-center justify-center bg-black/35 p-3 sm:p-6">
+                <Image
+                  key={screenshotViewer.screenshots[screenshotViewer.index].src}
+                  src={screenshotViewer.screenshots[screenshotViewer.index].src}
+                  alt={screenshotViewer.screenshots[screenshotViewer.index].alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 90vw"
+                  className="object-contain"
+                />
+                {screenshotViewer.screenshots.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      aria-label="Previous screenshot"
+                      onClick={() => setScreenshotViewer((current) => current ? { ...current, index: (current.index - 1 + current.screenshots.length) % current.screenshots.length } : null)}
+                      className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/60 text-xl transition hover:bg-primary sm:left-5"
+                    >‹</button>
+                    <button
+                      type="button"
+                      aria-label="Next screenshot"
+                      onClick={() => setScreenshotViewer((current) => current ? { ...current, index: (current.index + 1) % current.screenshots.length } : null)}
+                      className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/60 text-xl transition hover:bg-primary sm:right-5"
+                    >›</button>
+                  </>
+                )}
+              </div>
+              <div className="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3 text-xs text-white/55 sm:px-6">
+                <span>Use ← and → to browse</span>
+                <span>ESC to close</span>
+              </div>
+            </div>
+          </div>
+        )}
       </Container>
     </Section>
   )
